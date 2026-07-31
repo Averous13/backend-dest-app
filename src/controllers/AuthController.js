@@ -26,7 +26,9 @@ class AuthController {
 
     googleCallBack = catchAsync( async (req, res) => {
         const result = await AuthService.handleGoogleCallback(req.user);
-        res.redirect(`${process.env.CLIENT_URL}/dashboard?token=${result.token}`);
+        res.redirect(
+            `${process.env.CLIENT_URL}/oauth-success?token=${encodeURIComponent(result.token)}`
+        );
     })
 
     verifyEmail = catchAsync( async (req, res) => {
